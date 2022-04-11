@@ -30,4 +30,3 @@ for i in range(input):
 		heapq.heappush(min_heap, -max)
 
 	print(max_heap[0] * -1)
-
