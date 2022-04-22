@@ -11,23 +11,31 @@ def init(node, start, end):
         return tree[node]
 
 def update(node, start, end, index, change):
+
+    # index가 범위 밖에 존재 -> 무시
     if index < start or index > end:
         return
+
     # update node
     tree[node] += change
 
+    # index도착 이전 -> leaf node update
     if start < end:
         mid = (start + end)//2
         update(node*2, start, mid, index, change)
         update(node*2+1, mid+1, end, index, change)
 
 def sum(node, start, end, left, right):
+
+    # left ~ right가 범위 밖에 있는 경우 -> 무시
     if right < start or left > end:
         return 0
 
+    # left ~ right 안쪽에 있는 경우 -> 그냥 node값 반환
     if left <= start and end <= right:
         return tree[node]
 
+    # 그외: leaf node 합
     mid = (start + end)//2
     return sum(node*2, start, mid, left, right) + sum(node*2+1, mid+1, end, left, right)
 
